@@ -20,8 +20,9 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    if model is None:
-        return jsonify({"error": "Model not loaded. Please check the model file."}), 500
+    input_data = request.get_json()
+    # Logic for predictions
+    return jsonify({"prediction": prediction, "probabilities": probabilities})
 
     # Parse the input JSON
     input_data = request.get_json()
