@@ -21,8 +21,10 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     input_data = request.get_json()
-    # Logic for predictions
-    return jsonify({"prediction": prediction, "probabilities": probabilities})
+    # Validate input and return prediction
+    prediction = model.predict(input_data['features'])
+    probabilities = model.predict_proba(input_data['features'])
+    return jsonify({"prediction": prediction.tolist(), "probabilities": probabilities.tolist()})
 
     # Parse the input JSON
     input_data = request.get_json()
